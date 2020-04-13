@@ -37,3 +37,25 @@ update tbusuarios set fone='888888888' where iduser=2;
 -- a linha abaixo apaga um registro da tabela (crud)
 -- delete -> delete
 delete from tbusuarios where iduser=3;
+
+create table tbcliente(
+idcli int primary key auto_increment,
+nomecli varchar (50) not null,
+endcli varchar(100),
+cidadecli varchar (50) not null,
+estadocli varchar (50) not null,
+cepcli varchar   (50) not null,
+fonecli varchar(50) not null,
+emailcli varchar (50)
+);
+describe tbcliente;
+insert into tbcliente(nomecli,endcli,cidadecli,estadocli,cepcli,fonecli,emailcli)
+values('joao','Rua do pinguim','São Paulo','São Paulo','02000000','11-999999999','joao@gmail.com');
+
+insert into tbcliente(nomecli,endcli,cidadecli,estadocli,cepcli,fonecli,emailcli)
+values('maria','Rua da empresa','Guarulhos','São Paulo','02000000','11-888888888','maria@gmail.com');
+
+insert into tbcliente(nomecli,endcli,cidadecli,estadocli,cepcli,fonecli,emailcli)
+values('jose','Rua da Janela','São Paulo','São Paulo','05000000','11-666666666','jose@gmail.com');
+select * from tbcliente;
+
