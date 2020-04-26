@@ -36,9 +36,12 @@ update tbusuarios set fone='888888888' where iduser=2;
 
 -- a linha abaixo apaga um registro da tabela (crud)
 -- delete -> delete
-delete from tbusuarios where iduser=3;
+-- delete from tbusuarios where iduser=3;
 
-create table tbcliente(
+
+--  --------------------------   Passo 2 - Criação da tabela de Clientes  -------------------------
+
+create table tbclientes(
 idcli int primary key auto_increment,
 nomecli varchar (50) not null,
 endcli varchar(100),
@@ -48,14 +51,46 @@ cepcli varchar   (50) not null,
 fonecli varchar(50) not null,
 emailcli varchar (50)
 );
-describe tbcliente;
-insert into tbcliente(nomecli,endcli,cidadecli,estadocli,cepcli,fonecli,emailcli)
-values('joao','Rua do pinguim','São Paulo','São Paulo','02000000','11-999999999','joao@gmail.com');
+describe tbclientes;
 
 insert into tbcliente(nomecli,endcli,cidadecli,estadocli,cepcli,fonecli,emailcli)
-values('maria','Rua da empresa','Guarulhos','São Paulo','02000000','11-888888888','maria@gmail.com');
+values('marcos alves','Rua do pinguim','São Paulo','São Paulo','02000000','11-999999999','marco@gmail.com');
 
 insert into tbcliente(nomecli,endcli,cidadecli,estadocli,cepcli,fonecli,emailcli)
-values('jose','Rua da Janela','São Paulo','São Paulo','05000000','11-666666666','jose@gmail.com');
-select * from tbcliente;
+values('administrador','Rua da empresa','Guarulhos','São Paulo','02000000','11-888888888','marco@gmail.com');
+
+insert into tbcliente(nomecli,endcli,cidadecli,estadocli,cepcli,fonecli,emailcli)
+values('bill gates','Rua da Janela','São Paulo','São Paulo','05000000','11-666666666','marco@gmail.com');
+select * from tbclientes;
+
+-- --------------------------- Passo 3 - Criação da tabela ordem de serviço  -----------------------
+
+use dbinfox;
+create table tbos(
+os int primary key auto_increment,
+data_os timestamp default current_timestamp,
+equipamento varchar(150) not null,
+defeito varchar (150) not null,
+servico varchar (150),
+tecnico varchar (150),
+valor decimal (10,2),
+idcli int not null,
+foreign key(idcli) references tbclientes(idcli)
+);
+describe tbos;
+
+insert into tbos (equipamento,defeito,servico,tecnico,valor,idcli)
+values ('Notebook','Não Liga','Troca da fonte','Zé',87.50,1);
+
+select * from tbos;
+
+-- código abaixo traz informações de duas tabelas
+
+select 
+O.os,equipamento,defeito,servico,valor,
+C.nomecli,fonecli
+from tbos as O
+inner join tbclientes as C
+on (O.idcli = C.idcli);
+
 
